@@ -15,10 +15,10 @@ class Database {
     try {
       $dbh = new PDO("mysql:host=" . self::$servername, self::$username, self::$password);
 
-      $dbh->exec("CREATE DATABASE " . self::$dbname . ";")
+      $dbh->exec("CREATE DATABASE " . self::$dbname . " charset=utf8;")
       or die(print_r($dbh->errorInfo(), TRUE));
 
-      echo 'Database created successfully';
+      echo 'Database created successfully.<br>';
     } catch (PDOException $e) {
       echo "Connection failed: " . $e->getMessage();
     }
@@ -48,6 +48,18 @@ class Database {
       $conn = self::getDB();
       $conn->exec($sql);
       echo "Db deleted";
+    } catch (PDOException $e) {
+      echo $sql . "<br>" . $e->getMessage();
+    }
+
+    $conn = NULL;
+  }
+
+  public static function createTable($sql) {
+    try {
+      $conn = self::getDB();
+      $conn->exec($sql);
+      echo "Table created.<br>";
     } catch (PDOException $e) {
       echo $sql . "<br>" . $e->getMessage();
     }
