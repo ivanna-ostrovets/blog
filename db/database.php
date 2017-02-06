@@ -2,8 +2,7 @@
 
 class Database {
   private static $servername = "localhost";
-  private static $dbname = "blogDB";
-  private static $datasource;
+  private static $dbname = "blog";
   private static $username = 'root';
   private static $password = '';
   private static $db;
@@ -17,21 +16,19 @@ class Database {
 
       $dbh->exec("CREATE DATABASE " . self::$dbname . " charset=utf8;")
       or die(print_r($dbh->errorInfo(), TRUE));
-
-      echo 'Database created successfully.<br>';
     } catch (PDOException $e) {
       echo "Connection failed: " . $e->getMessage();
     }
   }
 
   public static function getDB() {
-    if (!isset(self::$datasource)) {
-      self::$datasource = "mysql:host=" . self::$servername . ";dbname=" . self::$dbname;
-    }
-
     if (!isset(self::$db)) {
       try {
-        self::$db = new PDO(self::$datasource, self::$username, self::$password);
+        self::$db = new PDO(
+          "mysql:host=" . self::$servername . ";dbname=" . self::$dbname,
+          self::$username,
+          self::$password
+        );
         self::$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       } catch (PDOException $e) {
         echo "Connection failed: " . $e->getMessage();
@@ -59,7 +56,6 @@ class Database {
     try {
       $conn = self::getDB();
       $conn->exec($sql);
-      echo "Table created.<br>";
     } catch (PDOException $e) {
       echo $sql . "<br>" . $e->getMessage();
     }
