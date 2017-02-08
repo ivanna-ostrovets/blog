@@ -7,8 +7,8 @@ function deleteImage(element) {
   xhr.send();
 
   xhr.onreadystatechange = function() {
-    if (this.readyState == 4) {
-      if (this.status == 200) {
+    if (this.readyState === 4) {
+      if (this.status === 200) {
         element.className += " hidden";
 
         var newImageButton = document.querySelector("#new_image");

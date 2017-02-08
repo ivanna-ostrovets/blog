@@ -10,7 +10,7 @@ class CategoryService {
   }
 
   public function createCategory($category) {
-    $sql = "INSERT INTO Categories (category) VALUES ('$category')";
+    $sql = "INSERT INTO categories (category) VALUES ('$category')";
 
     try {
       $this->db->exec($sql);
@@ -20,7 +20,7 @@ class CategoryService {
   }
 
   public function deleteCategory($category) {
-    $sql = "DELETE FROM Categories WHERE caregory = '$category'";
+    $sql = "DELETE FROM categories WHERE caregory='$category'";
 
     try {
       $this->db->exec($sql);
@@ -30,7 +30,7 @@ class CategoryService {
   }
 
   public function getAllCategories() {
-    $sql = "SELECT category FROM Categories";
+    $sql = "SELECT category FROM categories";
 
     try {
       $categories = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);

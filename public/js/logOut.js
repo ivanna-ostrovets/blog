@@ -5,8 +5,8 @@ function logOut() {
   xhr.send();
 
   xhr.onreadystatechange = function() {
-    if (this.readyState == 4) {
-      if (this.status == 200) {
+    if (this.readyState === 4) {
+      if (this.status === 200) {
         window.location.replace("/index.php");
       }
     }

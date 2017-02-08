@@ -42,9 +42,9 @@ $post = $postService->getPostById($_GET['id'], FALSE);
                required>
       </div>
 
-      <?php if ($post[0]['imagePath'] !== ''): ?>
+      <?php if ($post[0]['image_path'] !== ''): ?>
         <div class="image" id="image_preview"><img
-            src="<?= $post[0]['imagePath'] ?>"/></div>
+            src="<?= $post[0]['image_path'] ?>"/></div>
 
         <div class="form-group">
           <button type="button"
@@ -56,7 +56,7 @@ $post = $postService->getPostById($_GET['id'], FALSE);
       <?php endif; ?>
 
       <div class="form-group
-        <?php if ($post[0]['imagePath'] !== ''): ?>
+        <?php if ($post[0]['image_path'] !== ''): ?>
           hidden"
         <?php endif; ?>
            id="new_image">
@@ -74,7 +74,7 @@ $post = $postService->getPostById($_GET['id'], FALSE);
           <option value="" disabled>- Select one -</option>
           <?php foreach ($categories as $key => $value): ?>
             <option
-              <?php if ($post[0]['category'] == $key + 1): ?>
+              <?php if ($post[0]['category'] === $key + 1): ?>
                 selected
               <?php endif; ?>
               value="<?= $key + 1 ?>">

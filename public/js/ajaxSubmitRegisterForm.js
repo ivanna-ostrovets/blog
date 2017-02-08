@@ -12,10 +12,10 @@ function ajaxSubmitRegisterForm(form) {
   xhr.send(formData);
 
   xhr.onreadystatechange = function() {
-    if (this.readyState == 4) {
-      if (this.status == 200) {
+    if (this.readyState === 4) {
+      if (this.status === 200) {
         window.location.replace("/index.php");
-      } else if (this.status == 400) {
+      } else if (this.status === 400) {
         var errors = JSON.parse(this.response).errors;
         var errorsBox = document.querySelector("#errors");
         errorsBox.innerHTML = "";

@@ -13,10 +13,10 @@ function ajaxSubmitEditPost(form, id) {
   xhr.send(formData);
 
   xhr.onreadystatechange = function() {
-    if (this.readyState == 4) {
-      if (this.status == 200) {
+    if (this.readyState === 4) {
+      if (this.status === 200) {
         window.location.replace("/views/showPost.php?id=" + id);
-      } else if (this.status == 400) {
+      } else if (this.status === 400) {
         var errors = JSON.parse(this.response).errors;
         var errorsBox = document.querySelector("#errors");
         errorsBox.innerHTML = "";

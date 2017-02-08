@@ -10,7 +10,7 @@ class UserService {
   }
 
   public function checkUniqueEmail($email) {
-    $sql = "SELECT name FROM Users WHERE email = '$email'";
+    $sql = "SELECT name FROM users WHERE email='$email'";
 
     try {
       return $this->db->exec($sql) === FALSE;
@@ -21,7 +21,7 @@ class UserService {
 
   public function createUser($name, $email, $password, $role = "user") {
     $password_hash = password_hash($password, PASSWORD_DEFAULT);
-    $sql = "INSERT INTO Users (name, email, password, role) 
+    $sql = "INSERT INTO users (name, email, password, role) 
       VALUES ('$name', '$email', '$password_hash', '$role')";
 
     try {
@@ -32,7 +32,21 @@ class UserService {
   }
 
   public function getUserByEmail($email) {
-    $sql = "SELECT name, email, password, role FROM Users WHERE email = '$email'";
+    $sql = "SELECT * FROM users WHERE email='$email'";
+
+    try {
+      $user = $this->db->query($sql)->fetch(PDO::FETCH_ASSOC);
+
+      if (!empty($user)) {
+        return $user;
+      }
+    } catch (PDOException $e) {
+      echo $sql . "<br>" . $e->getMessage();
+    }
+  }
+
+  public function getUserById($id) {
+    $sql = "SELECT * FROM users WHERE id=$id";
 
     try {
       return $this->db->query($sql)->fetch(PDO::FETCH_ASSOC);
@@ -54,10 +68,29 @@ class UserService {
     }
   }
 
+  public function checkIfUserLikePost($postId) {
+    $userId = $this->getUserId($_SESSION['email']);
+    $sql = "SELECT * FROM likes WHERE post_id=$postId AND user_id=$userId";
+
+    try {
+      return $this->db->exec($sql) !== 0;
+    } catch (PDOException $e) {
+      echo $sql . "<br>" . $e->getMessage();
+    }
+  }
+
   public function logOut() {
     session_start();
     session_destroy();
     $_SESSION = array();
+  }
+
+  public function getUserId($email) {
+    if ($this->isLoggedIn()) {
+      $user = $this->getUserByEmail($email);
+
+      return $user['id'];
+    }
   }
 
   public function isLoggedIn() {
@@ -66,7 +99,7 @@ class UserService {
 
   public function isAdmin() {
     if ($this->isLoggedIn()) {
-      return $this->getUserByEmail($_SESSION['email'])['role'] == "admin";
+      return $this->getUserByEmail($_SESSION['email'])['role'] === "admin";
     }
 
     return FALSE;
