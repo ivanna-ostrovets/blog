@@ -70,10 +70,10 @@ class UserService {
 
   public function checkIfUserLikePost($postId) {
     $userId = $this->getUserId($_SESSION['email']);
-    $sql = "SELECT * FROM likes WHERE post_id=$postId AND user_id=$userId";
+    $sql = "SELECT COUNT(*) FROM likes WHERE post_id=$postId AND user_id=$userId";
 
     try {
-      return $this->db->exec($sql) !== 0;
+      return $this->db->query($sql)->fetchColumn() == 0;
     } catch (PDOException $e) {
       echo $sql . "<br>" . $e->getMessage();
     }

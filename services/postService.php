@@ -138,7 +138,7 @@ class PostService {
     $sql = "SELECT COUNT(*) FROM likes WHERE post_id=$postId";
 
     try {
-      $likesNumber = $this->db->exec($sql);
+      $likesNumber = $this->db->query($sql)->fetchColumn();
 
       return $likesNumber;
     } catch (PDOException $e) {

@@ -29,7 +29,9 @@ class Database {
           self::$username,
           self::$password
         );
+
         self::$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
       } catch (PDOException $e) {
         echo "Connection failed: " . $e->getMessage();
       }

@@ -62,7 +62,7 @@ $posts = $postService->getPosts(10);
           <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
           Like
           <?php $likesNumber = $postService->likesCount($value['id']); ?>
-          <span id="likes_<?= $value['id'] ?>"><?php print_r($likesNumber) ?></span>
+          <span id="likes_<?= $value['id'] ?>"><?php $likesNumber ?></span>
         </div>
 
         <?php if ($userService->isLoggedIn()): ?>
