@@ -35,7 +35,7 @@ class CategoryService {
     try {
       $categories = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
-      if ($categories) {
+      if (!empty($categories)) {
         return $categories;
       }
     } catch (PDOException $e) {

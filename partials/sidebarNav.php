@@ -6,9 +6,7 @@ $categories = $categoryService->getAllCategories();
 ?>
 
 <nav>
-  <a href="../index.php">Blog</a>
-
   <?php foreach ($categories as $key => $value): ?>
-    <a href="../index.php?category=<?= $key ?>"><?= $value['category'] ?></a>
+    <a href="../index.php?category=<?= $key + 1 ?>"><?= $value['category'] ?></a>
   <?php endforeach; ?>
 </nav>
