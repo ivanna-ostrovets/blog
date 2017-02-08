@@ -7,8 +7,11 @@ body {
     background-color: #fff;
 }
 
-.log-in-form {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+.log-in {
+    width: 23%;
+}
+
+
+.new-to-blog {
+    margin-bottom: 0;
 }
