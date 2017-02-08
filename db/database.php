@@ -44,6 +44,16 @@ class Database {
     try {
       $conn = self::getDB();
       $conn->exec($sql);
+
+      session_start();
+      session_destroy();
+      $_SESSION = array();
+
+      $imagesFolder = $_SERVER['DOCUMENT_ROOT'] . '/public/posts_images/';
+      chmod($imagesFolder, 0600);
+
+      array_map('unlink', glob($imagesFolder . '*'));
+
       echo "Db deleted";
     } catch (PDOException $e) {
       echo $sql . "<br>" . $e->getMessage();
