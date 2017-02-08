@@ -9,29 +9,20 @@ class UserService {
     $this->db = Database::getDB();
   }
 
-  public function createUser($name, $email, $password, $role = "user") {
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-      return FALSE;
-    }
-
-    $password_hash = password_hash($password, PASSWORD_DEFAULT);
-    $sql = "INSERT INTO Users (name, email, password, role) 
-      VALUES ('$name', '$email', '$password_hash', '$role')";
+  public function checkUniqueEmail($email) {
+    $sql = "SELECT name FROM Users WHERE email = '$email'";
 
     try {
-      $this->db->exec($sql);
+      return $this->db->exec($sql) === FALSE;
     } catch (PDOException $e) {
-      if ($e->errorInfo[1] == 1062) {
-        throw new Exception('This email already exists.');
-      }
-      else {
-        echo $sql . "<br>" . $e->getMessage();
-      }
+      echo $sql . "<br>" . $e->getMessage();
     }
   }
 
-  public function deleteUser($id) {
-    $sql = "DELETE FROM Users WHERE id = '$id'";
+  public function createUser($name, $email, $password, $role = "user") {
+    $password_hash = password_hash($password, PASSWORD_DEFAULT);
+    $sql = "INSERT INTO Users (name, email, password, role) 
+      VALUES ('$name', '$email', '$password_hash', '$role')";
 
     try {
       $this->db->exec($sql);
@@ -50,35 +41,35 @@ class UserService {
     }
   }
 
-  public function login($email, $password) {
+  public function logIn($email, $password) {
     $data = $this->getUserByEmail($email);
 
+    session_start();
+
     if ($data && password_verify($password, $data['password'])) {
-      session_start();
       $_SESSION['email'] = $email;
-//      header("Location: ../index.php");
-    }
-    else {
-      session_start();
+    } else {
       $_SESSION['email'] = '';
-      return "Invalid login or password!";
+      throw new Exception('Invalid email or password.');
     }
   }
 
-  public function logout() {
+  public function logOut() {
+    session_start();
     session_destroy();
-    unset($_SESSION);
-    session_regenerate_id(true);
+    $_SESSION = array();
   }
 
   public function isLoggedIn() {
-    return isset($_SESSION['email']) && $_SESSION['email'] != '';
+    return isset($_SESSION['email']) && !empty($_SESSION['email']);
   }
 
   public function isAdmin() {
     if ($this->isLoggedIn()) {
       return $this->getUserByEmail($_SESSION['email'])['role'] == "admin";
     }
+
+    return FALSE;
   }
 
   function __destruct() {

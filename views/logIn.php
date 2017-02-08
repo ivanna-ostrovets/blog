@@ -6,28 +6,17 @@ require_once(realpath($_SERVER["DOCUMENT_ROOT"]) . '/services/userService.php');
 <html>
 <head>
   <?php include realpath($_SERVER["DOCUMENT_ROOT"]) . '/partials/includes.php'; ?>
-  <script src="../public/js/ajaxSubmitRegisterForm.js"></script>
+  <script src="../public/js/ajaxSubmitLogInForm.js"></script>
 </head>
 <body>
 <?php include realpath($_SERVER["DOCUMENT_ROOT"]) . '/partials/nav.php'; ?>
 
 <main class="main">
-  <div class="errors"
-       id="errors">
-  </div>
+  <div class="errors" id="errors"></div>
 
-  <form onsubmit="return ajaxSubmitRegisterForm(this)"
+  <form onsubmit="return ajaxSubmitLogInForms(this)"
         method="post"
-        id="register_form">
-    <div class="form-group">
-      <label for="name">Name</label>
-      <input type="text"
-             name="name"
-             id="name"
-             placeholder="Enter name"
-             required>
-    </div>
-
+        id="log_in_form">
     <div class="form-group">
       <label for="email">Email</label>
       <input type="email"
@@ -46,17 +35,10 @@ require_once(realpath($_SERVER["DOCUMENT_ROOT"]) . '/services/userService.php');
              required>
     </div>
 
-    <div class="form-group">
-      <label for="confirm_password">Confirm Password</label>
-      <input type="password"
-             name="confirm_password"
-             id="confirm_password"
-             placeholder="Confirm password"
-             required>
-    </div>
-
     <button type="submit">Submit</button>
   </form>
+
+  <p>New to Blog? <a href="registration.php">Create an account.</a></p>
 </main>
 </body>
 </html>
