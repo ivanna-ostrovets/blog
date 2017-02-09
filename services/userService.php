@@ -13,7 +13,7 @@ class UserService {
     $sql = "SELECT name FROM users WHERE email='$email'";
 
     try {
-      return $this->db->exec($sql) == FALSE;
+      return !empty($this->db->query($sql)->fetchColumn());
     } catch (PDOException $e) {
       echo $sql . "<br>" . $e->getMessage();
     }
