@@ -164,6 +164,18 @@ class PostService {
     }
   }
 
+  public function getLastPostId() {
+    $sql = "SELECT id FROM posts ORDER BY id DESC LIMIT 1";
+
+    try {
+      $lastPostId = $this->db->query($sql)->fetchColumn();
+
+      return $lastPostId;
+    } catch (PDOException $e) {
+      echo $sql . "<br>" . $e->getMessage();
+    }
+  }
+
   function __destruct() {
     $this->db = NULL;
   }
