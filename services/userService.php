@@ -68,8 +68,7 @@ class UserService {
     }
   }
 
-  public function checkIfUserLikePost($postId) {
-    $userId = $this->getUserId($_SESSION['email']);
+  public function checkIfUserLikePost($postId, $userId) {
     $sql = "SELECT COUNT(*) FROM likes WHERE post_id=$postId AND user_id=$userId";
 
     try {

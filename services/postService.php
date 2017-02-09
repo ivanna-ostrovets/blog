@@ -1,6 +1,7 @@
 <?php
 
 require_once(realpath($_SERVER["DOCUMENT_ROOT"]) . '/db/database.php');
+require_once(realpath($_SERVER["DOCUMENT_ROOT"]) . '/services/userService.php');
 
 class PostService {
   private $db;
@@ -114,21 +115,24 @@ class PostService {
     }
   }
 
-  public function addLike($postId, $userId) {
-    $sql = "INSERT INTO likes (post_id, user_id) VALUES ($postId, $userId)";
+  public function toggleLike($postId, $userId) {
+    global $userService;
 
-    try {
-      $this->db->exec($sql);
-    } catch (PDOException $e) {
-      echo $sql . "<br>" . $e->getMessage();
+    $hasLike = !$userService->checkIfUserLikePost($postId, $userId);
+
+    if ($hasLike) {
+      $sql = "DELETE FROM likes WHERE post_id=$postId AND user_id=$userId";
+    } else {
+      $sql = "INSERT INTO likes (post_id, user_id) VALUES ($postId, $userId)";
     }
-  }
-
-  public function deleteLike($postId, $userId) {
-    $sql = "DELETE FROM likes WHERE post_id=$postId AND user_id=$userId";
 
     try {
       $this->db->exec($sql);
+
+      return array(
+        'likesCount' => $this->likesCount($postId),
+        'hasLike' => !$hasLike
+      );
     } catch (PDOException $e) {
       echo $sql . "<br>" . $e->getMessage();
     }
