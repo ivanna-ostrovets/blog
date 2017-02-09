@@ -2,8 +2,8 @@
 function thumbnailCreate($url) {
   $image = imagecreatefromstring(file_get_contents($url));
 
-  $thumb_width = 100;
-  $thumb_height = 100;
+  $thumb_width = 140;
+  $thumb_height = 140;
 
   $width = imagesx($image);
   $height = imagesy($image);
