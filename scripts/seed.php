@@ -99,6 +99,6 @@ $titles = array(
   "The next 7 things you should do for news success"
 );
 
-for ($i = 0; $i < 100; $i += 1) {
+for ($i = 0; $i < 150; $i += 1) {
   $postService->createPost($titles[array_rand($titles, 1)], rand(1, 4), $teaser, $text, "");
 }
