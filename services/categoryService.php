@@ -43,6 +43,21 @@ class CategoryService {
     }
   }
 
+  public function getCurrentCategory() {
+    $category = isset($_GET['category']) ? $_GET['category'] : 0;
+    $sql = "SELECT category FROM categories WHERE id='$category'";
+
+    try {
+      $category = $this->db->query($sql)->fetch(PDO::FETCH_ASSOC);
+
+      if (!empty($category)) {
+        return $category;
+      }
+    } catch (PDOException $e) {
+      echo $sql . "<br>" . $e->getMessage();
+    }
+  }
+
   function __destruct() {
     $this->db = NULL;
   }
