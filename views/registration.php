@@ -78,10 +78,12 @@ require_once(realpath($_SERVER["DOCUMENT_ROOT"]) . '/services/userService.php');
              required>
     </div>
 
-    <button type="submit"
-            class="btn btn-primary">
-      Submit
-    </button>
+    <div class="form-group">
+      <button type="submit"
+              class="btn btn-primary">
+        Create an account
+      </button>
+    </div>
   </form>
 </main>
 </body>
