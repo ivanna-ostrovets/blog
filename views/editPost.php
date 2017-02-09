@@ -22,7 +22,7 @@ $post = $postService->getPostById($_GET['id'], FALSE);
 <body>
 <?php include realpath($_SERVER["DOCUMENT_ROOT"]) . '/partials/nav.php'; ?>
 
-<main class="main container edit-post">
+<main class="container edit-post">
   <?php if ($userService->isAdmin()): ?>
     <div class="text-center">
       <h1>Edit post</h1>

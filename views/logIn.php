@@ -11,7 +11,7 @@ require_once(realpath($_SERVER["DOCUMENT_ROOT"]) . '/services/userService.php');
 <body>
 <?php include realpath($_SERVER["DOCUMENT_ROOT"]) . '/partials/nav.php'; ?>
 
-<main class="main container log-in">
+<main class="container log-in">
   <div class="text-center">
     <h1>Sign in to Blog</h1>
   </div>
