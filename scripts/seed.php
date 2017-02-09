@@ -42,7 +42,7 @@ $sql = "CREATE TABLE posts (
   teaser TEXT NOT NULL,
   content TEXT NOT NULL,
   image_path VARCHAR(255),
-  FOREIGN KEY (category) REFERENCES categories(id)
+  FOREIGN KEY (category) REFERENCES categories(id) ON UPDATE CASCADE ON DELETE CASCADE
 )";
 Database::createTable($sql);
 
@@ -51,8 +51,8 @@ $sql = "CREATE TABLE comments (
   user_id INT UNSIGNED,
   post_id INT UNSIGNED,
   comment TEXT NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES users(id),
-  FOREIGN KEY (post_id) REFERENCES posts(id)
+  FOREIGN KEY (user_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (post_id) REFERENCES posts(id) ON UPDATE CASCADE ON DELETE CASCADE
 )";
 Database::createTable($sql);
 
@@ -60,8 +60,8 @@ $sql = "CREATE TABLE likes (
   id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   user_id INT UNSIGNED,
   post_id INT UNSIGNED,
-  FOREIGN KEY (user_id) REFERENCES users(id),
-  FOREIGN KEY (post_id) REFERENCES posts(id)
+  FOREIGN KEY (user_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (post_id) REFERENCES posts(id) ON UPDATE CASCADE ON DELETE CASCADE
 )";
 Database::createTable($sql);
 

@@ -6,6 +6,15 @@ require_once(realpath($_SERVER["DOCUMENT_ROOT"]) . '/services/postService.php');
 require_once(realpath($_SERVER["DOCUMENT_ROOT"]) . '/services/commentService.php');
 
 $posts = $postService->getPosts(10);
+
+$urlParameters = "";
+
+if (isset($_GET['offset'])) {
+  $urlParameters .= "offset={$_GET['offset']}&";
+}
+if (isset($_GET['category'])) {
+  $urlParameters .= "category={$_GET['category']}&";
+}
 ?>
 
 <!DOCTYPE html>
@@ -58,7 +67,7 @@ $posts = $postService->getPosts(10);
                 </a>
 
                 <a class="btn btn-danger delete"
-                   href="/controllers/deletePost.php?id=<?= $value['id'] ?>">
+                   href="/controllers/deletePost.php?<?= $urlParameters ?>id=<?= $value['id'] ?>">
                   Delete
                 </a>
               <?php endif; ?>

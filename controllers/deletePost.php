@@ -3,13 +3,21 @@ require_once(realpath($_SERVER["DOCUMENT_ROOT"]) . '/services/postService.php');
 
 $postService->deletePost($_GET['id']);
 
-$urlPart = "";
+$urlParam = "?";
+$postsNumber = $postService->postCount();
 
 if (isset($_GET['offset'])) {
-  $urlPart .= "?offset={$_GET['offset']}";
+  $offset = (int) $_GET['offset'];
+
+  if ($postsNumber == $offset) {
+    $newOffset = $offset - 10;
+    $urlParam .= "offset={$newOffset}&";
+  } else {
+    $urlParam .= "offset={$offset}&";
+  }
 }
 if (isset($_GET['category'])) {
-  $urlPart .= "&category={$_GET['category']}";
+  $urlParam .= "category={$_GET['category']}";
 }
 
-header("Location: ../index.php{$urlPart}");
+header("Location: ../index.php{$urlParam}");
