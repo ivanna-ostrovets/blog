@@ -112,8 +112,7 @@ $post = $postService->getPostById($postId);
                   id="new_comment"
                   placeholder="Enter your comment"
                   required
-                  class="form-control">
-          </textarea>
+                  class="form-control"></textarea>
       </div>
 
       <div class="form-group">

@@ -64,7 +64,9 @@ $posts = $postService->getPosts(10);
               <?php endif; ?>
 
               <div class="likes">
-                <?php $userId = $userService->getUserId($_SESSION['email']); ?>
+                <?php if ($userService->isLoggedIn()): ?>
+                  <?php $userId = $userService->getUserId($_SESSION['email']); ?>
+                <?php endif; ?>
                 <button onclick="toggleLike(<?php echo $value['id'], ", ", $userId ?>)"
                         class="btn btn-default
                   <?php if ($userService->isLoggedIn()): ?>

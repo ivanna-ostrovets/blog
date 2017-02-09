@@ -85,8 +85,7 @@ $categories = $categoryService->getAllCategories();
                 id="content"
                 name="content"
                 class="form-control"
-                required>
-      </textarea>
+                required></textarea>
       <script>
         CKEDITOR.replace('content');
       </script>
@@ -100,8 +99,7 @@ $categories = $categoryService->getAllCategories();
       <textarea id="teaser"
                 name="teaser"
                 class="form-control"
-                required>
-      </textarea>
+                required></textarea>
     </div>
 
     <div class="form-group text-center">

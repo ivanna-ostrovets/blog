@@ -115,9 +115,7 @@ $post = $postService->getPostById($_GET['id'], FALSE);
                   id="content"
                   name="content"
                   class="form-control"
-                  required>
-        <?= $post[0]['content'] ?>
-        </textarea>
+                  required><?= $post[0]['content'] ?></textarea>
         <script>
           CKEDITOR.replace('content');
         </script>
@@ -131,9 +129,7 @@ $post = $postService->getPostById($_GET['id'], FALSE);
         <textarea id="teaser"
                   name="teaser"
                   class="form-control"
-                  required>
-        <?= $post[0]['teaser'] ?>
-        </textarea>
+                  required><?= $post[0]['teaser'] ?></textarea>
       </div>
 
       <div class="form-group text-center">
