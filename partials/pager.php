@@ -21,7 +21,10 @@ $checkUrl = "/index.php" . $urlPartForCheck;
 <nav class="text-center">
   <ul class="pagination">
     <li>
-      <?php if ($url === $checkUrl || $url === $checkUrl . "&offset=0" || $url === $checkUrl . "?offset=0"): ?>
+      <?php if ($url === "/"
+        || $url === $checkUrl
+        || $url === $checkUrl . "&offset=0"
+        || $url === $checkUrl . "?offset=0"): ?>
         <a href="/index.php?<?= $urlPart ?>offset=<?= $postsNumber - 10 ?>">
 
       <?php elseif ($offset): ?>
@@ -55,7 +58,11 @@ $checkUrl = "/index.php" . $urlPartForCheck;
             class="hidden"
           <?php endif; ?>
 
-        <?php elseif ($url === $checkUrl || $url === $checkUrl . "&offset=0" || $url === $checkUrl . "?offset=0"): ?>
+        <?php elseif ($url === "/"
+          || $url === $checkUrl
+          || $url === $checkUrl . "&offset=0"
+          || $url === $checkUrl . "?offset=0"): ?>
+
           <?php if ($i === 0): ?>
             class="active"
           <?php endif; ?>
@@ -82,7 +89,10 @@ $checkUrl = "/index.php" . $urlPartForCheck;
 
         <?php endif; ?>
 
-      <?php elseif ($url === $checkUrl || $url === $checkUrl . "&offset=0" || $url === $checkUrl . "?offset=0"): ?>
+      <?php elseif ($url === "/"
+        || $url === $checkUrl
+        || $url === $checkUrl . "&offset=0"
+        || $url === $checkUrl . "?offset=0"): ?>
         <a href="/index.php?<?= $urlPart ?>offset=10">
 
       <?php endif; ?>
