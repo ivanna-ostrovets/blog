@@ -16,6 +16,8 @@ class Database {
 
       $dbh->exec("CREATE DATABASE " . self::$dbname . " charset=utf8;")
       or die(print_r($dbh->errorInfo(), TRUE));
+
+      echo "Database created successfully." . "<br>";
     } catch (PDOException $e) {
       echo "Connection failed: " . $e->getMessage();
     }
@@ -56,7 +58,7 @@ class Database {
 
       array_map('unlink', glob($imagesFolder . '*'));
 
-      echo "Db deleted";
+      echo "Database deleted successfully." . "<br>";
     } catch (PDOException $e) {
       echo $sql . "<br>" . $e->getMessage();
     }
@@ -64,10 +66,12 @@ class Database {
     $conn = NULL;
   }
 
-  public static function createTable($sql) {
+  public static function createTable($sql, $tableName) {
     try {
       $conn = self::getDB();
       $conn->exec($sql);
+
+      echo "Table <b>$tableName</b> created successfully." . "<br>";
     } catch (PDOException $e) {
       echo $sql . "<br>" . $e->getMessage();
     }

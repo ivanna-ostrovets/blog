@@ -15,7 +15,7 @@ $sql = "CREATE TABLE users (
   password VARCHAR(255),
   role VARCHAR(255)
   )";
-Database::createTable($sql);
+Database::createTable($sql, "users");
 
 //Creates administrator account
 $userService->createUser('admin', 'admin@gmail.com', 'password', 'admin');
@@ -26,7 +26,7 @@ $sql = "CREATE TABLE categories (
   id INT AUTO_INCREMENT PRIMARY KEY, 
   category VARCHAR(255) NOT NULL
   )";
-Database::createTable($sql);
+Database::createTable($sql, "categories");
 
 //Creates some basic categories
 $categoryService->createCategory("Sport");
@@ -44,8 +44,9 @@ $sql = "CREATE TABLE posts (
   image_path VARCHAR(255),
   FOREIGN KEY (category) REFERENCES categories(id) ON UPDATE CASCADE ON DELETE CASCADE
 )";
-Database::createTable($sql);
+Database::createTable($sql, "posts");
 
+//Creates table for comments
 $sql = "CREATE TABLE comments (
   id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   user_id INT UNSIGNED,
@@ -54,8 +55,9 @@ $sql = "CREATE TABLE comments (
   FOREIGN KEY (user_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE,
   FOREIGN KEY (post_id) REFERENCES posts(id) ON UPDATE CASCADE ON DELETE CASCADE
 )";
-Database::createTable($sql);
+Database::createTable($sql, "comments");
 
+//Creates table for likes
 $sql = "CREATE TABLE likes (
   id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   user_id INT UNSIGNED,
@@ -63,8 +65,9 @@ $sql = "CREATE TABLE likes (
   FOREIGN KEY (user_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE,
   FOREIGN KEY (post_id) REFERENCES posts(id) ON UPDATE CASCADE ON DELETE CASCADE
 )";
-Database::createTable($sql);
+Database::createTable($sql, "likes");
 
+//Text for auto generating posts
 $text = "Lorem ipsum dolor sit amet, ei omnis fugit postea sea, alia solet est cu,
 at prima tantas consetetur sea. Ad lorem fugit quaeque sit, sale graeci electram vim ea.
 Utroque constituto qui te, ferri indoctum posidonium at vim. Mel stet ferri ex,
@@ -80,9 +83,11 @@ accumsan in, per ex libris verear interesset, nisl complectitur qui cu. Mei poss
 vituperata et. Ne vel praesent petentium mnesarchum, ea erant aliquip ceteros eum,
 commune vituperata per eu.";
 
+//Teaser for auto generating posts
 $teaser = "Lorem ipsum dolor sit amet, ei omnis fugit postea sea, alia solet est cu,
 at prima tantas consetetur sea. Ad lorem fugit quaeque sit, sale graeci electram vim ea.";
 
+//Titles for auto generating posts
 $titles = array(
   "Apply these 7 secret techniques to improve news",
   "Believing these 7 myths about news keeps you from growing",
@@ -99,6 +104,7 @@ $titles = array(
   "The next 7 things you should do for news success"
 );
 
+//Creates posts with default pictures
 for ($i = 0; $i < 150; $i += 1) {
   $postService->createPost($titles[array_rand($titles, 1)], rand(1, 4), $teaser, $text, "");
 }
