@@ -16,8 +16,7 @@ $comments = $commentService->getComments($postId);
 <head>
   <?php include realpath($_SERVER["DOCUMENT_ROOT"]) . '/partials/includes.php'; ?>
   <script src="../public/js/ajaxAddComment.js"></script>
-  <script src="/public/js/addLike.js"></script>
-  <script src="/public/js/deleteLike.js"></script>
+  <script src="/public/js/toggleLike.js"></script>
 </head>
 <body>
 <?php include realpath($_SERVER["DOCUMENT_ROOT"]) . '/partials/nav.php'; ?>
@@ -36,19 +35,26 @@ $comments = $commentService->getComments($postId);
 
       <div class="text-show"><?= $post[0]['content'] ?></div>
 
-      <div class="likes"
-        <?php if ($userService->isLoggedIn()): ?>
-          <?php if (!$userService->checkIfUserLikePost($value['id'])): ?>
-            onclick="addLike(<?= $value['id'] ?>, <?= $userId ?>)"
+      <div class="likes">
+        <?php $userId = $userService->getUserId($_SESSION['email']); ?>
+        <button onclick="toggleLike(<?php echo $postId, ", ", $userId ?>)"
+                class="btn btn-default
+          <?php if ($userService->isLoggedIn()): ?>
+            <?php if ($userService->checkIfUserLikePost($postId, $userId)): ?>
+              "
+            <?php else: ?>
+              btn-success"
+            <?php endif; ?>
           <?php else: ?>
-            onclick="deleteLike(<?= $value['id'] ?>, <?= $userId ?>)"
+            disabled
+            data-toggle="tooltip"
+            title="Please log in to like this post"
           <?php endif; ?>
-          data-toggle="tooltip"
-          title="Only authorised users can like it."
-        <?php endif; ?>>
-        <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-        Like
-        <span id="likes_<?= $value['id'] ?>"><?= $value['likes'] ?></span>
+        >
+          <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+          <?php $likesNumber = $postService->likesCount($postId); ?>
+          <span id="likes_<?= $postId ?>"><?= $likesNumber ?></span>
+        </button>
       </div>
 
       <?php if ($userService->isAdmin()): ?>

@@ -12,8 +12,7 @@ $posts = $postService->getPosts(10);
 <html>
 <head>
   <?php include realpath($_SERVER["DOCUMENT_ROOT"]) . '/partials/includes.php'; ?>
-  <script src="/public/js/addLike.js"></script>
-  <script src="/public/js/deleteLike.js"></script>
+  <script src="/public/js/toggleLike.js"></script>
 </head>
 <body>
 <?php include realpath($_SERVER["DOCUMENT_ROOT"]) . '/partials/nav.php'; ?>
@@ -64,24 +63,26 @@ $posts = $postService->getPosts(10);
                 </a>
               <?php endif; ?>
 
-              <div class="likes"
-                <?php if ($userService->isLoggedIn()): ?>
-                  <?php $userId = $userService->getUserId($_SESSION['email']); ?>
-                  <?php if ($userService->checkIfUserLikePost($value['id'])): ?>
-                    onclick="addLike(<?php echo $value['id'], ", ", $userId ?>)"
+              <div class="likes">
+                <?php $userId = $userService->getUserId($_SESSION['email']); ?>
+                <button onclick="toggleLike(<?php echo $value['id'], ", ", $userId ?>)"
+                        class="btn btn-default
+                  <?php if ($userService->isLoggedIn()): ?>
+                    <?php if ($userService->checkIfUserLikePost($value['id'], $userId)): ?>
+                      "
+                    <?php else: ?>
+                      btn-success"
+                    <?php endif; ?>
                   <?php else: ?>
-                    onclick="deleteLike(<?php echo $value['id'], ", ", $userId ?>)"
+                    disabled
+                    data-toggle="tooltip"
+                    title="Please log in to like this post"
                   <?php endif; ?>
-                <?php else: ?>
-                  data-toggle="tooltip"
-                  title="Only authorised users can like it."
-                <?php endif; ?>
-              >
-                <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-                Like
-
-                <?php $likesNumber = $postService->likesCount($value['id']); ?>
-                <span id="likes_<?= $value['id'] ?>"><?= $likesNumber ?></span>
+                >
+                  <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                  <?php $likesNumber = $postService->likesCount($value['id']); ?>
+                  <span id="likes_<?= $value['id'] ?>"><?= $likesNumber ?></span>
+                </button>
               </div>
 
               <div class="btn btn-info read-more pull-right">
