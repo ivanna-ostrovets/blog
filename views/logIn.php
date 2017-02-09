@@ -54,7 +54,7 @@ require_once(realpath($_SERVER["DOCUMENT_ROOT"]) . '/services/userService.php');
 
     <div class="form-group">
       <button type="submit"
-              class="col-sm-12 btn btn-primary">
+              class="btn btn-primary">
         Sign in
       </button>
     </div>
