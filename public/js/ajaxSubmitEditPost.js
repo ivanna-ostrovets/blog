@@ -20,6 +20,7 @@ function ajaxSubmitEditPost(form, id) {
         var errors = JSON.parse(this.response).errors;
         var errorsBox = document.querySelector("#errors");
         errorsBox.innerHTML = "";
+        errorsBox.className = errorsBox.className.replace(" hidden", "");
 
         errors.forEach(function(error) {
           errorsBox.innerHTML += "<p>" + error.message + "</p>";

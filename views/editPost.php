@@ -22,34 +22,48 @@ $post = $postService->getPostById($_GET['id'], FALSE);
 <body>
 <?php include realpath($_SERVER["DOCUMENT_ROOT"]) . '/partials/nav.php'; ?>
 
-<main class="main">
+<main class="main container edit-post">
   <?php if ($userService->isAdmin()): ?>
-    <div class="errors"
+    <div class="text-center">
+      <h1>Edit post</h1>
+    </div>
+
+    <div class="row alert alert-danger text-center hidden"
+         role="alert"
          id="errors">
     </div>
 
     <form onsubmit="return ajaxSubmitEditPost(this, getUrLParameter('id'))"
           method="post"
           id="create_post_form"
-          enctype="multipart/form-data">
+          enctype="multipart/form-data"
+          class="row well">
+
       <div class="form-group">
-        <label for="title">Title</label>
+        <label for="title"
+               class="control-label">
+          Title
+        </label>
         <input type="text"
                name="title"
                id="title"
                placeholder="Enter title"
+               class="form-control"
                value="<?= $post[0]['title'] ?>"
                required>
       </div>
 
       <?php if ($post[0]['image_path'] !== ''): ?>
-        <div class="image" id="image_preview"><img
-            src="<?= $post[0]['image_path'] ?>"/></div>
+        <div class="form-group" id="image_preview">
+          <img src="<?= $post[0]['image_path'] ?>"
+               class="img-thumbnail"/>
+        </div>
 
         <div class="form-group">
           <button type="button"
                   name="delete_image"
-                  onclick="deleteImage(this)">
+                  onclick="deleteImage(this)"
+                  class="btn btn-info">
             Delete old image
           </button>
         </div>
@@ -60,17 +74,25 @@ $post = $postService->getPostById($_GET['id'], FALSE);
           hidden"
         <?php endif; ?>
            id="new_image">
-        <label for="image">Choose new image</label>
+        <label for="image"
+               class="control-label">
+          Choose new image
+        </label>
         <input type="file"
                name="image"
                id="image"
-               accept="image/*">
+               accept="image/*"
+               class="form-control">
       </div>
 
       <div class="form-group">
-        <label for="category">Category</label>
+        <label for="category"
+               class="control-label">
+          Category
+        </label>
         <select name="category"
-                id="category">
+                id="category"
+                class="form-control">
           <option value="" disabled>- Select one -</option>
           <?php foreach ($categories as $key => $value): ?>
             <option
@@ -85,10 +107,14 @@ $post = $postService->getPostById($_GET['id'], FALSE);
       </div>
 
       <div class="form-group">
-        <label for="content">Content</label>
+        <label for="content"
+               class="control-label">
+          Content
+        </label>
         <textarea class="ckeditor"
                   id="content"
                   name="content"
+                  class="form-control"
                   required>
         <?= $post[0]['content'] ?>
         </textarea>
@@ -98,21 +124,35 @@ $post = $postService->getPostById($_GET['id'], FALSE);
       </div>
 
       <div class="form-group">
-        <label for="teaser">Teaser</label>
+        <label for="teaser"
+               class="control-label">
+          Teaser
+        </label>
         <textarea id="teaser"
                   name="teaser"
+                  class="form-control"
                   required>
         <?= $post[0]['teaser'] ?>
         </textarea>
       </div>
 
-      <button type="submit">Submit</button>
+      <div class="form-group text-center">
+        <button type="submit"
+                class="btn btn-success">
+          Submit
+        </button>
 
-      <a href="showPost.php?id=<?= $post[0]['id'] ?>">Cancel</a>
+        <a href="showPost.php?id=<?= $post[0]['id'] ?>"
+           class="btn btn-danger">
+          Cancel
+        </a>
+      </div>
     </form>
   <?php else: ?>
-    <div class="no-posts">
-      <span>You do not have access to view this page.</span>
+    <div class="row alert alert-danger text-center"
+         role="alert"
+         id="errors">
+      <p>You do not have access to view this page.</p>
     </div>
   <?php endif; ?>
 </main>

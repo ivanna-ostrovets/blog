@@ -21,7 +21,8 @@ body {
     min-width: 320px;
 }
 
-.log-in .btn, .register .btn {
+.log-in .btn,
+.register .btn {
     margin-top: 5px;
     width: 100%;
 }
@@ -30,21 +31,21 @@ body {
     margin-top: 0;
 }
 
-.register .text-center h1, .create-post .text-center h1  {
+.register .text-center h1,
+.create-post .text-center h1,
+.edit-post .text-center h1  {
     margin-top: 0;
     margin-bottom: 10px;
 }
 
-.create-post {
+.create-post,
+.edit-post {
     width: 70%;
     min-width: 320px;
     margin-top: -5px;
 }
 
-.create-post .btn {
+.create-post .btn,
+.edit-post .btn {
     margin-top: 5px;
 }
-
-/*.create-post .alert {*/
-    /*margin-top: 5px;*/
-/*}*/

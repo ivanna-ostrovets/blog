@@ -12,28 +12,37 @@ if (!empty($_FILES['image']['tmp_name'])) {
   $imagePath = '/public/posts_images/' . basename($_FILES["image"]["name"]);
   $imageFileType = pathinfo($imagePath, PATHINFO_EXTENSION);
 
-  $errors = array();
-
-  if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-    && $imageFileType != "gif") {
-    $errors[] = array("message" => "Sorry, only JPG, JPEG, PNG & GIF files are allowed.");
-  }
-
-  if (getimagesize($_FILES["image"]["tmp_name"]) === FALSE) {
-    $errors[] = array("message" => "File is not an image.");
-  }
-
-  if (!move_uploaded_file($_FILES["image"]["tmp_name"], realpath($_SERVER["DOCUMENT_ROOT"]) . $imagePath)) {
-    $errors[] = array("message" => "Sorry, there was an error uploading your file.");
+  if ($imageFileType == "jpg"
+    || $imageFileType == "png"
+    || $imageFileType == "jpeg"
+    || $imageFileType == "gif"
+  ) {
+    if (getimagesize($_FILES["image"]["tmp_name"]) === FALSE) {
+      $errors[] = array("message" => "File is not an image.");
+    } else {
+      if (!move_uploaded_file($_FILES["image"]["tmp_name"], realpath($_SERVER["DOCUMENT_ROOT"]) . $imagePath)) {
+        $errors[] = array("message" => "Sorry, there was an error uploading your file.");
+      } else {
+        thumbnailCreate(realpath($_SERVER["DOCUMENT_ROOT"]) . $imagePath);
+      }
+    }
   } else {
-    thumbnailCreate(realpath($_SERVER["DOCUMENT_ROOT"]) . $imagePath);
+    $errors[] = array("message" => "Sorry, only JPG, JPEG, PNG & GIF files are allowed.");
   }
 } else {
   $imagePath = 0;
 }
 
 if (empty($category)) {
-  $errors[] = array("message" => "Please, select category.");
+  $errors[] = array("message" => "Please select category.");
+}
+
+if (empty($content)) {
+  $errors[] = array("message" => "Please fill out content field.");
+}
+
+if (empty($teaser)) {
+  $teaser = mb_substr($content, 0, 100) . "...";
 }
 
 if (empty($errors)) {
