@@ -1,6 +1,6 @@
 function addLike(postId, userId) {
   var xhr = new XMLHttpRequest();
-  var url = "/controllers/addLike.php?post_id=" + postId + "&user_id" + userId;
+  var url = "/controllers/addLike.php?post_id=" + postId + "&user_id=" + userId;
 
   xhr.open("POST", url, true);
   xhr.send();

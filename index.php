@@ -50,19 +50,21 @@ $posts = $postService->getPosts(10);
         <div class="likes"
           <?php if ($userService->isLoggedIn()): ?>
             <?php $userId = $userService->getUserId($_SESSION['email']); ?>
-            <?php if (!$userService->checkIfUserLikePost($value['id'])): ?>
-              onclick="addLike(<?= $value['id'] ?>, <?= $userId ?>)"
+            <?php if ($userService->checkIfUserLikePost($value['id'])): ?>
+              onclick="addLike(<?php echo $value['id'], ", ", $userId ?>)"
             <?php else: ?>
-              onclick="deleteLike(<?= $value['id'] ?>, <?= $userId ?>)"
+              onclick="deleteLike(<?php echo $value['id'], ", ", $userId ?>)"
             <?php endif; ?>
           <?php else: ?>
             data-toggle="tooltip"
             title="Only authorised users can like it."
-          <?php endif; ?>>
+          <?php endif; ?>
+        >
           <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
           Like
+
           <?php $likesNumber = $postService->likesCount($value['id']); ?>
-          <span id="likes_<?= $value['id'] ?>"><?php $likesNumber ?></span>
+          <span id="likes_<?= $value['id'] ?>"><?= $likesNumber ?></span>
         </div>
 
         <?php if ($userService->isLoggedIn()): ?>
