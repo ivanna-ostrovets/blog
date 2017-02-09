@@ -18,7 +18,7 @@ $categories = $categoryService->getAllCategories();
 <body>
 <?php include realpath($_SERVER["DOCUMENT_ROOT"]) . '/partials/nav.php'; ?>
 
-<main class="main container create-post">
+<main class="container create-post">
   <div class="text-center">
     <h1>Create post</h1>
   </div>

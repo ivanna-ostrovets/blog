@@ -1,3 +1,7 @@
+* {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
+
 .hidden {
     display: none;
 }
@@ -33,7 +37,7 @@ body {
 
 .register .text-center h1,
 .create-post .text-center h1,
-.edit-post .text-center h1  {
+.edit-post .text-center h1 {
     margin-top: 0;
     margin-bottom: 10px;
 }
@@ -48,4 +52,85 @@ body {
 .create-post .btn,
 .edit-post .btn {
     margin-top: 5px;
+}
+
+.post {
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 1px 3px 0 rgba(0, 0, 0, 0.19);
+    border-left: 5px solid #333;
+    margin-bottom: 10px;
+    overflow: auto;
+}
+
+.post .title-row {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.post .title {
+    margin-right: 25px;
+}
+
+.post .title-row .label {
+    font-size: 60%;
+    margin-right: 25px;
+}
+
+.image {
+    width: 140px;
+    height: 140px;
+}
+
+.post .read-more,
+.post .comments,
+.post .edit,
+.post .delete,
+.post .likes {
+    display: inline-block;
+}
+
+.btn-info a {
+    color: #fff;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.post .btn, .post-show .btn {
+    padding: 2px 8px;
+}
+
+.post .teaser {
+    margin-top: 15px;
+}
+
+.post .buttons {
+    margin-top: 15px;
+}
+
+.post .buttons .btn {
+    margin-right: 5px;
+}
+
+.post-show-container {
+    width: 70%;
+    min-width: 600px;
+}
+
+.post-show {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-bottom: 30px;
+}
+
+.post-show .category {
+    font-size: 110%;
+    font-weight: 600;
+}
+
+.text-show {
+    margin-top: 15px;
+}
+
+.add-comment-form .btn {
+    margin-top: -5px;
 }

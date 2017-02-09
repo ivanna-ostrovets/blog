@@ -11,7 +11,7 @@ require_once(realpath($_SERVER["DOCUMENT_ROOT"]) . '/services/userService.php');
 <body>
 <?php include realpath($_SERVER["DOCUMENT_ROOT"]) . '/partials/nav.php'; ?>
 
-<main class="main container register">
+<main class="container register">
   <div class="text-center">
     <h1>Join Blog</h1>
   </div>
