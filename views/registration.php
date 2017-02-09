@@ -11,51 +11,77 @@ require_once(realpath($_SERVER["DOCUMENT_ROOT"]) . '/services/userService.php');
 <body>
 <?php include realpath($_SERVER["DOCUMENT_ROOT"]) . '/partials/nav.php'; ?>
 
-<main class="main">
-  <div class="errors"
+<main class="main container register">
+  <div class="text-center">
+    <h1>Join Blog</h1>
+  </div>
+
+  <div class="row alert alert-danger text-center hidden"
+       role="alert"
        id="errors">
   </div>
 
   <form onsubmit="return ajaxSubmitRegisterForm(this)"
         method="post"
-        id="register_form">
+        id="register_form"
+        class="row well">
+
     <div class="form-group">
-      <label for="name">Name</label>
+      <label for="name"
+             class="control-label">
+        Name
+      </label>
       <input type="text"
              name="name"
              id="name"
              placeholder="Enter name"
+             class="form-control"
              required>
     </div>
 
     <div class="form-group">
-      <label for="email">Email</label>
+      <label for="email"
+             class="control-label">
+        Email
+      </label>
       <input type="email"
              name="email"
              id="email"
              placeholder="Enter email"
+             class="form-control"
              required>
     </div>
 
     <div class="form-group">
-      <label for="password">Password</label>
+      <label for="password"
+             class="control-label">
+        Password
+      </label>
       <input type="password"
              name="password"
              id="password"
              placeholder="Enter password"
+             class="form-control"
              required>
     </div>
 
     <div class="form-group">
-      <label for="confirm_password">Confirm Password</label>
+      <label for="confirm_password"
+             class="control-label">
+        Confirm Password
+      </label>
       <input type="password"
              name="confirm_password"
              id="confirm_password"
              placeholder="Confirm password"
+             class="form-control"
              required>
     </div>
 
-    <button type="submit">Submit</button>
+    <button type="submit"
+            class="btn btn-primary">
+      Submit
+    </button>
   </form>
 </main>
 </body>

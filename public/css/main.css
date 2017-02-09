@@ -9,8 +9,27 @@ body {
 
 .log-in {
     width: 23%;
+    min-width: 300px;
 }
 
 .new-to-blog {
     margin-bottom: 0;
+}
+
+.register {
+    width: 25%;
+    min-width: 320px;
+}
+
+.log-in .btn, .register .btn {
+    margin-top: 5px;
+    width: 100%;
+}
+
+.alert > p + p {
+    margin-top: 0;
+}
+
+.register .text-center h1 {
+    margin-top: 0;
 }
