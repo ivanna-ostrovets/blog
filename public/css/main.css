@@ -84,7 +84,13 @@ body {
 .post .comments,
 .post .edit,
 .post .delete,
-.post .likes {
+.post .likes,
+.comment .comment-title,
+.comment .delete,
+.post-show .back,
+.post-show .edit,
+.post-show .delete,
+.post-show .likes {
     display: inline-block;
 }
 
@@ -96,7 +102,9 @@ a:hover {
     text-decoration: none;
 }
 
-.post .btn, .post-show .btn {
+.post .btn,
+.post-show .btn,
+.comment .btn {
     padding: 2px 8px;
 }
 
@@ -104,7 +112,8 @@ a:hover {
     margin-top: 15px;
 }
 
-.post .buttons {
+.post .buttons,
+.post-show .buttons {
     margin-top: 15px;
 }
 
@@ -113,7 +122,7 @@ a:hover {
 }
 
 .post-show-container {
-    width: 70%;
+    width: 60%;
     min-width: 600px;
 }
 
@@ -132,5 +141,23 @@ a:hover {
 }
 
 .add-comment-form .btn {
+    margin-top: -5px;
+}
+
+.comments-count {
+    font-size: 110%;
+    font-weight: 600;
+}
+
+.comment .name {
+    margin-right: 10px;
+}
+
+.comment-title {
+    margin-top: 0;
+    border-bottom: 1px solid #eee;
+}
+
+.comment-header {
     margin-top: -5px;
 }
