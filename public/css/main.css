@@ -156,6 +156,7 @@ a:hover {
 .comment-title {
     margin-top: 0;
     border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
 }
 
 .comment-header {
