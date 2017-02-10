@@ -10,15 +10,11 @@ $urlPartOffset = "";
 
 if (isset($_GET['category']) && isset($_GET['offset'])) {
   $urlPart = "?category={$_GET['category']}&offset={$_GET['offset']}";
-} else {
-  if (isset($_GET['offset'])) {
-    $urlPart = "?offset={$_GET['offset']}";
-    $urlPartOffset = "?offset={$_GET['offset']}";
-  } else {
-    if (isset($_GET['category'])) {
-      $urlPart = "?category={$_GET['category']}";
-    }
-  }
+} else if (isset($_GET['offset'])) {
+  $urlPart = "?offset={$_GET['offset']}";
+  $urlPartOffset = "?offset={$_GET['offset']}";
+} else if (isset($_GET['category'])) {
+  $urlPart = "?category={$_GET['category']}";
 }
 
 $url = $_SERVER['REQUEST_URI'];
@@ -96,7 +92,7 @@ $url = $_SERVER['REQUEST_URI'];
 
           <li>
             <a id="log_out"
-               onclick="logOut()">
+               onclick="logOut('<?= $urlPart ?>')">
               Log Out
             </a>
           </li>
@@ -106,7 +102,7 @@ $url = $_SERVER['REQUEST_URI'];
               active
             <?php endif; ?>
           ">
-            <a href="/views/logIn.php">Log In</a>
+            <a href="/views/logIn.php<?= $urlPart ?>">Log In</a>
           </li>
 
           <li class="
@@ -114,7 +110,7 @@ $url = $_SERVER['REQUEST_URI'];
                 active
               <?php endif; ?>
               ">
-            <a href="../views/registration.php">Register</a>
+            <a href="../views/registration.php<?= $urlPart ?>">Register</a>
           </li>
         <?php endif; ?>
       </ul>

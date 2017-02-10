@@ -6,6 +6,7 @@ require_once(realpath($_SERVER["DOCUMENT_ROOT"]) . '/services/userService.php');
 <html>
 <head>
   <?php include realpath($_SERVER["DOCUMENT_ROOT"]) . '/partials/includes.php'; ?>
+  <script src="../public/js/getUrLParameter.js"></script>
   <script src="../public/js/ajaxSubmitLogInForm.js"></script>
 </head>
 <body>

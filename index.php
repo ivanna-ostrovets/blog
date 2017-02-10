@@ -22,6 +22,7 @@ if (isset($_GET['category'])) {
 <head>
   <?php include realpath($_SERVER["DOCUMENT_ROOT"]) . '/partials/includes.php'; ?>
   <script src="/public/js/toggleLike.js"></script>
+  <script src="/public/js/getUrLParameter.js"></script>
 </head>
 <body>
 <?php include realpath($_SERVER["DOCUMENT_ROOT"]) . '/partials/nav.php'; ?>

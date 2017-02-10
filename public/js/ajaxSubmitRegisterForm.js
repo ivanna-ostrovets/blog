@@ -11,10 +11,23 @@ function ajaxSubmitRegisterForm(form) {
   xhr.open("POST", "/controllers/registration.php");
   xhr.send(formData);
 
+  var offset = getUrLParameter("offset");
+  var category = getUrLParameter("category");
+  var urlPart = "";
+
+  if (offset && category) {
+    urlPart += "?offset=" + offset + "&category=" + category;
+  } else if (offset) {
+    urlPart += "?offset=" + offset;
+  }
+  else if (category) {
+    urlPart += "?category=" + category;
+  }
+
   xhr.onreadystatechange = function() {
     if (this.readyState === 4) {
       if (this.status === 200) {
-        window.location.replace("/index.php");
+        window.location.replace("/index.php" + urlPart);
       } else if (this.status === 400) {
         var errors = JSON.parse(this.response).errors;
         var errorsBox = document.querySelector("#errors");
